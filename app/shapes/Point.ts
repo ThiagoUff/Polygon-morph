@@ -1,22 +1,26 @@
 export class Point{
-    private _x : number;
-    private _y : number;
+    private x : number;
+    private y : number;
+    private correspondence : Point
+    private MaxX : number
+    private MaxY : number
+    private Min : number
 
     constructor(x:number, y: number){
         this.x = x;
         this.y = y;
     }
-    public get y() : number {
-        return this._y;
+    public getY() : number {
+        return this.y;
     }
-    public set y(v : number) {
-        this._y = v;
+    public setY(v : number) {
+        this.y = v;
     }
-    public get x() : number {
-        return this._x;
+    public getX() : number {
+        return this.x;
     }
-    public set x(v : number) {
-        this._x = v;
+    public setX(v : number) {
+        this.x = v;
     }
     setConvex(){}
     setConcave(){}
