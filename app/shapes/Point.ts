@@ -29,7 +29,7 @@ export class Point{
     getCorrespondence(){}
     hasCorrespondence(){}
     clearCorrespondence(){}
-    equals(point): boolean{
+    equals(point: Point): boolean{
         return this.x==point.x && this.y==point.y
     }
     toString(){}

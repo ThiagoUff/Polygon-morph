@@ -51,7 +51,10 @@ export class Polygon{
     getLength() : number{
         return null;
     }
-    close() : void{}
+    close(): void 
+    {
+        this.closed = true;
+    }
     getFeaturePoint(index : number) : FeaturePoint{
         return this.featurePoints[index];
     }
@@ -72,7 +75,9 @@ export class Polygon{
     contains(p : Point) : boolean {return null;} 
     isConvex(p : Point) : boolean{return null;} 
     isClosingPoint(p : Point) : boolean{return null;} 
-    isClosed() : boolean{return null;} 
+    isClosed() : boolean{
+        return this.all_vertices[0].equals(this.all_vertices[this.all_vertices.length-1])
+    } 
     setAllVerticesToFeaturePoints() : void{}
     setDashed(dashed : boolean) : void{}
     isDashed() : boolean {return null;} 
