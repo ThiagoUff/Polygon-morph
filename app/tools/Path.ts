@@ -1,3 +1,4 @@
+import { Node } from "./Node"
 export class Path {
     nodes: Array<Node>
     size: number

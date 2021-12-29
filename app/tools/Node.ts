@@ -26,18 +26,18 @@ export class Node {
     getX(): number{return null}
     setY(y: number): void{}
     getY(): number{return null}
-    setSourcePoint(sourcePoint: FeaturePoint): void{}
-    getSourcePoint(): FeaturePoint{return null}
-    setTargetPoint(targetPoint: FeaturePoint): void{}
-    getTargetPoint(): FeaturePoint{return null}
-    setSimCosts(simcost: number): void{}
-    setPredecessor(pred: Node): void{}
-    getPredecessor(): Node {return null}
-    equals(other: Node): boolean{return null}
-    equalsComplete(other: Node): boolean{return null}
-    getSimCosts(): number{return null}
-    setPathCosts(path_costs: number): void{}
-    getPathCosts(): number{return null}
-    clone():void{}
-        toString(): void {}
+    setSourcePoint(sourcePoint: FeaturePoint): void{ throw new Error("Function not implemented.");}
+    getSourcePoint(): FeaturePoint{throw new Error("Function not implemented.");}
+    setTargetPoint(targetPoint: FeaturePoint): void{ throw new Error("Function not implemented.");}
+    getTargetPoint(): FeaturePoint{throw new Error("Function not implemented.");}
+    setSimCosts(simcost: number): void{ throw new Error("Function not implemented.");}
+    setPredecessor(pred: Node): void{ throw new Error("Function not implemented.");}
+    getPredecessor(): Node {throw new Error("Function not implemented.");}
+    equals(other: Node): boolean{throw new Error("Function not implemented.");}
+    equalsComplete(other: Node): boolean{throw new Error("Function not implemented.");}
+    getSimCosts(): number{throw new Error("Function not implemented.");}
+    setPathCosts(path_costs: number): void{ throw new Error("Function not implemented.");}
+    getPathCosts(): number{throw new Error("Function not implemented.");}
+    clone():void{throw new Error("Function not implemented.");}
+    toString(): void {throw new Error("Function not implemented.");}
 }

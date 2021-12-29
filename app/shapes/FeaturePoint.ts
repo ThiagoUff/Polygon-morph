@@ -84,7 +84,7 @@ export class FeaturePoint extends Point{
         this.angle = v;
     }
 
-    calculate_Sim_Cost(fp : FeaturePoint) : number{
+    public static calculate_Sim_Cost(s: FeaturePoint, t: FeaturePoint) : number{
         return 0;
     }
 }
