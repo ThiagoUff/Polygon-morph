@@ -1,22 +1,19 @@
-import point from '../shapes/Point'
-import Polygon from '../shapes/Polygon'
-import utils from '../../scripts/common/js/utils';
 'use strict';
-
-
+import utils from '../common/js/utils.js'
+import shapesHelper from '../common/js/shapesHelper.js'
 // Global variables that are set and used
 // across the application
 let gl,
   program,
   squareVertexBuffer,
   squareIndexBuffer,
-  indices;
+  indices = [];
 
 // Given an id, extract the content's of a shader script
 // from the DOM and return the compiled shader
 function getShader(id) {
-  const script = document.getElementById(id) as HTMLInputElement;
-  const shaderString = script.innerText.trim();
+  const script = document.getElementById(id);
+  const shaderString = script.text.trim();
 
   // Assign shader depending on the type of shader
   let shader;
@@ -67,43 +64,39 @@ function initProgram() {
 }
 
 // Set up the buffers for the square
-function initBuffers() {
-  /*
-    V0                    V3
-    (-0.5, 0.5, 0)        (0.5, 0.5, 0)
-    X---------------------X
-    |                     |
-    |                     |
-    |       (0, 0)        |
-    |                     |
-    |                     |
-    X---------------------X
-    V1                    V2
-    (-0.5, -0.5, 0)       (0.5, -0.5, 0)
-  */
-  const vertices = [
-    -0.5, 0.5, 0,
-    -0.5, -0.5, 0,
-    0.5, -0.5, 0,
-    0.5, 0.5, 0
-  ];
+function initBuffers(Polygon) {
+ 
+    let verts = Polygon.getAllVertices();  
+    let vertices = [];
+    
+    for(let i = 0; i < verts.length ; i++){
+        vertices.push(verts[i].getX());
+        vertices.push(verts[i].getY());
+        vertices.push(0);
+        if(i==verts.length-1){
+            indices.push(0);
+            indices.push(1);
+            indices.push(verts.length);
+        }else{
+            indices.push(0);
+            indices.push(i+1);
+            indices.push(i+2);
+        }
+    }
 
-  // Indices defined in counter-clockwise order
-  indices = [0, 1, 2, 0, 2, 3];
+    // Setting up the VBO
+    squareVertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
-  // Setting up the VBO
-  squareVertexBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    // Setting up the IBO
+    squareIndexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, squareIndexBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
 
-  // Setting up the IBO
-  squareIndexBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, squareIndexBuffer);
-  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-
-  // Clean
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+    // Clean
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 }
 
 // We call draw to render to our canvas
@@ -130,22 +123,26 @@ function draw() {
 
 // Entry point to our application
 function init() {
-  // Retrieve the canvas
-  const canvas = utils.getCanvas('webgl-canvas');
+    // Retrieve the canvas
+    const canvas = utils.getCanvas('webgl-canvas');
 
-  // Set the canvas to the size of the screen
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+    let poly = shapesHelper.jsonToPolygon();
+    let fp = shapesHelper.printFP(poly);
+    // Set the canvas to the size of the screen
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-  // Retrieve a WebGL context
-  gl = utils.getGLContext(canvas);
-  // Set the clear color to be black
-  gl.clearColor(0, 0, 0, 1);
+    // Retrieve a WebGL context
+    gl = utils.getGLContext(canvas);
+    // Set the clear color to be black
+    gl.clearColor(0, 0, 0, 1);
 
-  // Call the functions in an appropriate order
-  initProgram();
-  initBuffers();
-  draw();
+    // Call the functions in an appropriate order
+    initProgram();
+    initBuffers(poly);
+    draw();
+
+
 }
 
 // Call init once the webpage has loaded
