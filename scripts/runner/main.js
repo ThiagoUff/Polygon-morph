@@ -70,8 +70,8 @@ function initBuffers(Polygon) {
     let vertices = [];
     
     for(let i = 0; i < verts.length ; i++){
-        vertices.push(verts[i].getX());
-        vertices.push(verts[i].getY());
+        vertices.push(verts[i].getX()/1000);
+        vertices.push(verts[i].getY()/1000);
         vertices.push(0);
         if(i==verts.length-1){
             indices.push(0);
@@ -128,6 +128,7 @@ function init() {
 
     let poly = shapesHelper.jsonToPolygon();
     let fp = shapesHelper.printFP(poly);
+    
     // Set the canvas to the size of the screen
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;

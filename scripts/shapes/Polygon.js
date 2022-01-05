@@ -1,3 +1,7 @@
+'use strict';
+
+import FeaturePoint from "./FeaturePoint.js";
+
 export class Polygon {
     all_vertices = []
     featurePoints = []
@@ -10,8 +14,10 @@ export class Polygon {
         this.all_vertices = new Array();
         this.featurePoints = new Array();
     }
-    addVertex(p) {
+    addVertex(p,isFeaturePoint) {
         this.all_vertices.push(p);
+        if (isFeaturePoint)
+            this.featurePoints.push(p);
     }
     getVertex(index) {
         return this.all_vertices[index];
@@ -39,7 +45,14 @@ export class Polygon {
         return null;
     }
     getLength() {
-        return null;
+        let dist = 0;
+        for (let i = 0; i <  this.all_vertices.length - 2; i++) {
+            let yDist = (this.all_vertices[i+1].y - this.all_vertices[i].y);
+            let xDist = (this.all_vertices[i+1].x - this.all_vertices[i].x);
+            let partialDist = Math.sqrt(Math.pow(yDist,2) * Math.pow(xDist,2));
+            dist += partialDist
+        }
+        return dist;
     }
     close() {
         this.closed = true;

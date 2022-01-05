@@ -1,4 +1,3 @@
-import { NumberLiteralType } from "typescript"
 import Covariance from "../math/Covariance"
 import FeaturePoint from "../shapes/FeaturePoint"
 import { Point } from "../shapes/Point"

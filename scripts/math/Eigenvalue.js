@@ -4,4 +4,3 @@ export class Eigenvalue {
     hrq_tweaked(a) { return null; }
 }
 export default Eigenvalue;
-//# sourceMappingURL=Eigenvalue.js.map

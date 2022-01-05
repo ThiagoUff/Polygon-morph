@@ -15,4 +15,3 @@ export class Path {
     toString() { return null; }
 }
 export default Path;
-//# sourceMappingURL=Path.js.map

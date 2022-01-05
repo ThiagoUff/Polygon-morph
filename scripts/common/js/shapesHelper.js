@@ -10,14 +10,21 @@ export const shapesHelper = {
     jsonToPolygon()
     {
         let poly = new Polygon();
-         data.forEach(point => {
-            poly.addVertex(new Point(point.x, point.y))
-        });
+        for (let index = 0; index < data.length; index++) {
+            poly.addVertex(new Point(data[index].x, data[index].y))
+        }
         return poly;
     },
 
     printFP(polygon){
-        return FeaturePointDetector.FeaturePonumberDetector(polygon);
+        let fpd = new FeaturePointDetector();
+        let result = fpd.featureDetection(polygon);
+        let fps = result.featurePoints;
+
+        fps.forEach(fp => {
+            console.log(fp.x)
+        }); 
+        return result
     }
 
 

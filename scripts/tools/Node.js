@@ -31,4 +31,3 @@ export class Node {
     clone() { }
     toString() { }
 }
-//# sourceMappingURL=Node.js.map

@@ -1,4 +1,5 @@
-import { Point } from "./Point";
+'use strict';
+import Point from "./Point.js";
 export class FeaturePoint extends Point {
     constructor(point) {
         super(point.getX(), point.getY());
