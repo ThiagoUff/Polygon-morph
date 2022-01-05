@@ -1,3 +1,4 @@
+'use strict';
 export class Point {
     constructor(x, y) {
         this.x = x;
@@ -32,3 +33,4 @@ export class Point {
     toSVG() { }
 }
 export default Point;
+//# sourceMappingURL=Point.js.map
